@@ -28,11 +28,10 @@ const PortfolioOne = ({ Column }) => {
     } else {
       tempData = getAllItems.filter(
         (data) =>
-          data.stack === e.target.textContent.toLowerCase() &&
-          data.id <= dataVisibleCount
+          data.stack === e.target.textContent.toLowerCase()
       );
     }
-    setVisibleItems(tempData);
+    setVisibleItems(tempData.slice(0, dataVisibleCount));
   };
 
   const handleLoadmore = (e) => {
@@ -47,7 +46,7 @@ const PortfolioOne = ({ Column }) => {
       } else {
         setVisibleItems(
           getAllItems.filter(
-            (data) => data.company === activeFilter && data.id <= tempCount
+            (data) => data.stack === activeFilter && data.id <= tempCount
           )
         );
       }
