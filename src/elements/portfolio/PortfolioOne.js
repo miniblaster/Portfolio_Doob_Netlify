@@ -4,25 +4,7 @@ import { FaSpinner } from "react-icons/fa";
 import PortfolioData from "../../data/portfolio/PortfolioData.json";
 import EducationInfo from "../../data/education.json";
 import ExperienceInfo from "../../data/experience.json";
-
-const filters = [
-  {
-    id: 1,
-    text: "All",
-  },
-  {
-    id: 2,
-    text: "design",
-  },
-  {
-    id: 3,
-    text: "art",
-  },
-  {
-    id: 4,
-    text: "development",
-  },
-];
+import filters from "../../data/stack.json";
 
 const alldata = ExperienceInfo;
 const PortfolioOne = ({ Column }) => {
@@ -46,7 +28,7 @@ const PortfolioOne = ({ Column }) => {
     } else {
       tempData = getAllItems.filter(
         (data) =>
-          data.company === e.target.textContent.toLowerCase() &&
+          data.stack === e.target.textContent.toLowerCase() &&
           data.id <= dataVisibleCount
       );
     }
@@ -74,6 +56,27 @@ const PortfolioOne = ({ Column }) => {
 
   return (
     <>
+      <div className="row row--15">
+        <div className="col-lg-12">
+          <ul className="rwt-portfolio-filter filter-button-default liststyle mb--20">
+            {filters.map((filter) => (
+            <li className="list-item" key={filter.id}>
+              <button
+              onClick={handleChange}
+              className={
+                filter.text.toLowerCase() === activeFilter
+                ? "current"
+                : " "
+              }
+              >
+              {filter.text}
+              </button>
+            </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
       <div className="row row--15">
         {visibleItems.map((item) => (
           <div key={item.id} className={Column}>
